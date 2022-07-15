@@ -189,8 +189,8 @@ public class StudentService {
                     a = new Student[studentCount];
                     for (int i = 0, j = 0; i < arr.length; i++) {
                         if (arr[i].getMark() >= mark) {
-                            j++;
                             a[j] = arr[i];
+                            j++;
                         }
                     }
                 }
