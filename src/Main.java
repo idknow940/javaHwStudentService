@@ -28,13 +28,9 @@ public class Main {
         Student[] students = {s1, s2, s3};
         studentService.sortByAge(students, true);
 
-        System.out.println(
-                "Oldest "
-                        + studentService.oldestStudent(students)[0].info());
-        System.out.println(
-                "Youngest "
-                        + studentService.youngestStudent(students)[0].info());
-        System.out.println(students[0].info());
+        System.out.println("Oldest " + studentService.oldestStudent(students)[0].info());
+        System.out.println("Youngest " + studentService.youngestStudent(students)[0].info());
+        System.out.println();
         studentService.printStudents(students);
     }
 }

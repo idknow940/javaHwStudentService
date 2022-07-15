@@ -113,7 +113,8 @@ public class StudentService {
         Student[] females = femaleStudents(arr);
         Student[] youngestF = youngestStudent(females);
         for (Student f : youngestF) {
-            System.out.println(f);
+            if (f.getGender() == 'f' || f.getGender() == 'F')
+                System.out.println(f.info());
         }
     }
 
@@ -121,7 +122,8 @@ public class StudentService {
         Student[] females = femaleStudents(arr);
         Student[] youngestF = youngestStudent(females);
         for (Student f : youngestF) {
-            System.out.println(f);
+            if (f.getGender() == 'f' || f.getGender() == 'F')
+                System.out.println(f.info());
         }
     }
 
@@ -129,7 +131,8 @@ public class StudentService {
         Student[] males = femaleStudents(arr);
         Student[] youngestM = youngestStudent(males);
         for (Student m : youngestM) {
-            System.out.println(m);
+            if (m.getGender() == 'm' || m.getGender() == 'M')
+                System.out.println(m.info());
         }
     }
 
@@ -137,25 +140,26 @@ public class StudentService {
         Student[] males = maleStudents(arr);
         Student[] youngestM = youngestStudent(males);
         for (Student m : youngestM) {
-            System.out.println(m);
+            if (m.getGender() == 'm' || m.getGender() == 'M')
+                System.out.println(m.info());
         }
     }
 
     public void printPhdFemales(Student[] arr) {
         Student[] females = femaleStudents(arr);
         Student[] phdF = phdStudents(females);
-        for (Student f :
-                phdF) {
-            System.out.println(f);
+        for (Student f : phdF) {
+            if (f.getGender() == 'f' || f.getGender() == 'F')
+                System.out.println(f.info());
         }
     }
 
     public void printPhdMales(Student[] arr) {
         Student[] males = maleStudents(arr);
         Student[] phdM = phdStudents(males);
-        for (Student m :
-                phdM) {
-            System.out.println(m);
+        for (Student m : phdM) {
+            if (m.getGender() == 'm' || m.getGender() == 'M')
+                System.out.println(m.info());
         }
     }
 
@@ -220,7 +224,8 @@ public class StudentService {
 
     public void printStudents(Student[] arr){
         for (Student i : arr) {
-            System.out.println(i.info());
+            if (i != null)
+                System.out.println(i.info());
         }
     }
 }
