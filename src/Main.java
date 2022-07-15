@@ -27,9 +27,26 @@ public class Main {
 
         Student[] students = {s1, s2, s3};
         studentService.sortByAge(students, true);
-
         System.out.println("Oldest " + studentService.oldestStudent(students)[0].info());
         System.out.println("Youngest " + studentService.youngestStudent(students)[0].info());
+        System.out.println();
+        studentService.printYoungestFemales(students);
+        System.out.println();
+        studentService.printOldestFemales(students);
+        System.out.println();
+        studentService.printYoungestMales(students);
+        System.out.println();
+        studentService.printOldestMales(students);
+        System.out.println();
+        studentService.printPhdFemales(students);
+        System.out.println();
+        studentService.printPhdMales(students);
+        System.out.println();
+        Student[] sep = studentService.seperateByMarks(85.0, true, students);
+        System.out.println();
+        studentService.phdStudents(students);
+        System.out.println();
+        System.out.println(sep[0]);
         System.out.println();
         studentService.printStudents(students);
     }
