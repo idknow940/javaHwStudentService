@@ -112,8 +112,7 @@ public class StudentService {
     public void printYoungestFemales(Student[] arr) {
         Student[] females = femaleStudents(arr);
         Student[] youngestF = youngestStudent(females);
-        for (Student f :
-                youngestF) {
+        for (Student f : youngestF) {
             System.out.println(f);
         }
     }
@@ -121,26 +120,23 @@ public class StudentService {
     public void printOldestFemales(Student[] arr) {
         Student[] females = femaleStudents(arr);
         Student[] youngestF = youngestStudent(females);
-        for (Student f :
-                youngestF) {
+        for (Student f : youngestF) {
             System.out.println(f);
         }
     }
 
     public void printYoungestMales(Student[] arr) {
-        Student[] females = femaleStudents(arr);
-        Student[] youngestF = youngestStudent(females);
-        for (Student f :
-                youngestF) {
-            System.out.println(f);
+        Student[] males = femaleStudents(arr);
+        Student[] youngestM = youngestStudent(males);
+        for (Student m : youngestM) {
+            System.out.println(m);
         }
     }
 
     public void printOldestMales(Student[] arr) {
         Student[] males = maleStudents(arr);
         Student[] youngestM = youngestStudent(males);
-        for (Student m :
-                youngestM) {
+        for (Student m : youngestM) {
             System.out.println(m);
         }
     }
@@ -221,9 +217,9 @@ public class StudentService {
             }
         }
     }
+
     public void printStudents(Student[] arr){
-        for (Student i:
-                arr) {
+        for (Student i : arr) {
             System.out.println(i.info());
         }
     }
