@@ -1,12 +1,10 @@
 import model.Student;
-import service.Interact;
 import service.StudentService;
 
 public class Main {
     public static void main(String[] args) {
         StudentService studentService = new StudentService();
-        Interact inter = new Interact();
-        Student[] students = inter.run();
+        Student[] students = studentService.interact();
         studentService.sortByAge(students, true);
         System.out.println("Oldest " + studentService.oldestStudent(students)[0].info());
         System.out.println("Youngest " + studentService.youngestStudent(students)[0].info());
@@ -33,6 +31,5 @@ public class Main {
         System.out.println();
         System.out.print("Students: ");
         studentService.printStudents(students);
-
     }
 }

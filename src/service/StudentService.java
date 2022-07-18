@@ -2,6 +2,8 @@ package service;
 
 import model.Student;
 
+import java.util.Scanner;
+
 public class StudentService {
     public Student[] oldestStudent(Student[] arr) {
         Student oldest = arr[0];
@@ -247,5 +249,33 @@ public class StudentService {
                     System.out.println(i.info());
             }
         }
+    }
+
+
+    public Student[] interact() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("enter the total number of students");
+        int numOfStudents = s.nextInt();
+        s.nextLine();
+        Student[] students = new Student[numOfStudents];
+        for (int i = 0; i < numOfStudents; i++) {
+            Student st = new Student();
+            System.out.print("Full name: ");
+            st.setFullName(s.nextLine());
+            System.out.print("Year Of Birth: ");
+            st.setYear(s.nextInt());
+            s.nextLine();
+            System.out.print("Gender [m/f]: ");
+            st.setGender(s.nextLine().charAt(0));
+            System.out.print("PHD [y/n]: ");
+            char phd = s.nextLine().charAt(0);
+            st.setPhd(phd == 'y' || phd == 'Y');
+            System.out.print("Mark: ");
+            st.setMark(s.nextDouble());
+            s.nextLine();
+            students[i] = st;
+            System.out.println();
+        }
+        return students;
     }
 }
