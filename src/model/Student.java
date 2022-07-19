@@ -38,7 +38,7 @@ public class Student {
     }
 
     public void setGender(char gender) {
-        this.gender = gender;
+        this.gender = gender == 'M' || gender == 'm' ? 'm' : 'f';
     }
 
     public boolean isPhd() {

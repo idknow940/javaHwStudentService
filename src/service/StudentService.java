@@ -5,46 +5,185 @@ import model.Student;
 import java.util.Scanner;
 
 public class StudentService {
-    public Student[] oldestStudent(Student[] arr) {
-        Student oldest = arr[0];
-        int oldestCount = 0;
-        for (Student i : arr) {
-            if (i.getYear() <= oldest.getYear()) {
-                oldest = i;
-                oldestCount++;
+    Scanner scanner = new Scanner(System.in);
+    Student[] students = null;
+
+    public void menu() {
+        boolean active = true;
+        System.out.println("----STUDENT CREATION MENU----");
+
+        while (active) {
+            System.out.println("0. create students");
+            System.out.println("1. print students");
+            System.out.println("2. sort students by age");
+            System.out.println("3. oldest students");
+            System.out.println("4. youngest students");
+            System.out.println("5. PHD students");
+            System.out.println("6. male students");
+            System.out.println("7. female students");
+            System.out.println("8. youngest female students");
+            System.out.println("9. youngest male students");
+            System.out.println("10. oldest female students");
+            System.out.println("11. oldest male students");
+            System.out.println("99. exit");
+            System.out.print(">> ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 0:
+                    if (students == null) {
+                        create();
+                    } else {
+                        System.out.print("Student array already created, want to create one again?: [y/n]");
+                        choice = scanner.nextLine().charAt(0);
+                        if (choice == 'y' || choice == 'Y') {
+                            create();
+                        }
+                    }
+                    break;
+                case 1:
+                    if (students != null) {
+                        for (Student student : students) {
+                            if (student != null)
+                                System.out.println(student.info());
+                        }
+                        System.out.println();
+                    }
+                    break;
+                case 2:
+                    System.out.print("Ascending order? [y/n]: ");
+                    char inp = scanner.nextLine().charAt(0);
+                    boolean asc = inp == 'y' || inp == 'Y';
+                    sortByAge(students, asc);
+                    break;
+                case 3:
+                    System.out.println("Oldest " + oldestStudents(students)[0].info());
+                    break;
+                case 4:
+                    System.out.println("Youngest " + youngestStudents(students)[0].info());
+                    break;
+                case 5:
+                    System.out.println("PHD students: ");
+                    printStudents(phdStudents(students));
+                    break;
+                case 6:
+                    System.out.println("Male students: ");
+                    printStudents(femaleStudents(students));
+                    break;
+                case 7:
+                    System.out.println("Female students: ");
+                    printStudents(maleStudents(students));
+                    break;
+                case 8:
+                    System.out.println("Youngest Females: ");
+                    printYoungestFemales(students);
+                    break;
+                case 9:
+                    System.out.println("Youngest Males: ");
+                    printYoungestMales(students);
+                    break;
+                case 10:
+                    System.out.println("Oldest Females: ");
+                    printOldestFemales(students);
+                    break;
+                case 11:
+                    System.out.println("Oldest Males: ");
+                    printOldestMales(students);
+                    break;
+                case 99:
+                    active = false;
+                default:
+                    break;
             }
         }
+    }
+
+    public void create() {
+        boolean active = false;
+        System.out.print("How many students will you enter [must be a number]: ");
+        int studentCount = scanner.nextInt();
+        scanner.nextLine();
+        students = new Student[studentCount];
+        for (int i = 0; i < studentCount; i++) {
+            Student student = new Student();
+
+            // setting full name
+            System.out.print("Full name: ");
+            student.setFullName(scanner.nextLine());
+
+            // setting year
+            System.out.print("Birth year [must be a number]: ");
+            student.setYear(scanner.nextInt());
+            scanner.nextLine();
+
+            // setting gender
+            System.out.print("Gender [m/f]: ");
+            student.setGender(scanner.nextLine().charAt(0));
+
+            // setting phd
+            System.out.print("Is PHD [y/n]: ");
+            char phd = scanner.nextLine().charAt(0);
+            student.setPhd(phd == 'y' || phd == 'Y');
+
+            // setting mark
+            System.out.print("Mark: ");
+            student.setMark(scanner.nextDouble());
+            scanner.nextLine();
+
+            students[i] = student;
+
+            System.out.println();
+        }
+    }
+
+    public Student[] getStudents() {
+        return students;
+    }
+
+    public Student[] oldestStudents(Student[] arr) {
         Student[] oldestArr = null;
-        if (oldestCount != 0) {
-            oldestArr = new Student[oldestCount];
-            oldestArr[0] = oldest;
-            for (int i = 1, j = 0; i < arr.length; i++) {
-                if (arr[i].getYear() == oldest.getYear()) {
-                    j++;
-                    oldestArr[j] = arr[i];
+        if (arr != null) {
+            Student oldest = arr[0];
+            int oldestCount = 0;
+            for (Student i : arr) {
+                if (i.getYear() <= oldest.getYear()) {
+                    oldest = i;
+                    oldestCount++;
+                }
+            }
+            if (oldestCount != 0) {
+                oldestArr = new Student[oldestCount];
+                for (int i = 0, j = 0; i < arr.length; i++) {
+                    if (arr[i].getYear() == oldest.getYear()) {
+                        oldestArr[j] = arr[i];
+                        j++;
+                    }
                 }
             }
         }
         return oldestArr;
     }
 
-    public Student[] youngestStudent(Student[] arr) {
-        Student youngest = arr[0];
-        int youngestCount = 0;
-        for (Student i : arr) {
-            if (i.getYear() >= youngest.getYear()) {
-                youngest = i;
-                youngestCount++;
-            }
-        }
+    public Student[] youngestStudents(Student[] arr) {
         Student[] youngestArr = null;
-        if (youngestCount != 0) {
-            youngestArr = new Student[youngestCount];
-            youngestArr[0] = youngest;
-            for (int i = 1, j = 0; i < arr.length; i++) {
-                if (arr[i].getYear() == youngest.getYear()) {
-                    j++;
-                    youngestArr[j] = arr[i];
+        if (arr != null) {
+            Student youngest = arr[0];
+            int youngestCount = 0;
+            for (Student i : arr) {
+                if (i.getYear() >= youngest.getYear()) {
+                    youngest = i;
+                    youngestCount++;
+                }
+            }
+            if (youngestCount != 0) {
+                youngestArr = new Student[youngestCount];
+                for (int i = 0, j = 0; i < arr.length; i++) {
+                    if (arr[i].getYear() == youngest.getYear()) {
+                        youngestArr[j] = arr[i];
+                        j++;
+                    }
                 }
             }
         }
@@ -97,18 +236,20 @@ public class StudentService {
 
     public Student[] phdStudents(Student[] arr) {
         int count = 0;
-        for (Student student : arr) {
-            if (student != null && (student.isPhd())) {
-                count++;
-            }
-        }
         Student[] students = null;
-        if (count != 0) {
-            students = new Student[count];
-            for (int i = 0, j = 0; i < arr.length; i++) {
-                if (arr[i] != null && (arr[i].isPhd())) {
-                    students[j] = arr[i];
-                    j++;
+        if (arr != null) {
+            for (Student student : arr) {
+                if (student != null && (student.isPhd())) {
+                    count++;
+                }
+            }
+            if (count != 0) {
+                students = new Student[count];
+                for (int i = 0, j = 0; i < arr.length; i++) {
+                    if (arr[i] != null && (arr[i].isPhd())) {
+                        students[j] = arr[i];
+                        j++;
+                    }
                 }
             }
         }
@@ -116,8 +257,8 @@ public class StudentService {
     }
 
     public void printYoungestFemales(Student[] arr) {
-        Student[] youngestF = youngestStudent(arr);
-        Student[] females = femaleStudents(youngestF);
+        Student[] females = femaleStudents(arr);
+        Student[] youngestF = youngestStudents(females);
         if (females != null) {
             for (Student f : youngestF) {
                 if (f != null && (f.getGender() == 'f' || f.getGender() == 'F'))
@@ -127,8 +268,8 @@ public class StudentService {
     }
 
     public void printOldestFemales(Student[] arr) {
-        Student[] oldestF = youngestStudent(arr);
-        Student[] females = femaleStudents(oldestF);
+        Student[] females = femaleStudents(arr);
+        Student[] oldestF = oldestStudents(females);
         if (females != null) {
             for (Student f : oldestF) {
                 if (f != null && (f.getGender() == 'f' || f.getGender() == 'F'))
@@ -138,7 +279,7 @@ public class StudentService {
     }
 
     public void printYoungestMales(Student[] arr) {
-        Student[] youngestM = youngestStudent(arr);
+        Student[] youngestM = youngestStudents(arr);
         Student[] males = maleStudents(youngestM);
         if (males != null) {
             for (Student m : males) {
@@ -149,10 +290,10 @@ public class StudentService {
     }
 
     public void printOldestMales(Student[] arr) {
-        Student[] oldestM = youngestStudent(arr);
-        Student[] males = maleStudents(oldestM);
+        Student[] males = maleStudents(arr);
+        Student[] oldestM = oldestStudents(males);
         if (males != null) {
-            for (Student m : males) {
+            for (Student m : oldestM) {
                 if (m != null && (m.getGender() == 'm' || m.getGender() == 'M'))
                     System.out.println(m.info());
             }
@@ -174,7 +315,7 @@ public class StudentService {
         Student[] phdM = phdStudents(arr);
         Student[] males = maleStudents(phdM);
         if (males != null) {
-            for (Student m : phdM) {
+            for (Student m : males) {
                 if (m != null && (m.getGender() == 'm' || m.getGender() == 'M'))
                     System.out.println(m.info());
             }
@@ -225,13 +366,13 @@ public class StudentService {
             for (int i = 0; i < arr.length - 1; i++) {
                 for (int j = 0; j < arr.length - i - 1; j++) {
                     if (ascending) {
-                        if (arr[j] != null && arr[i] != null && (arr[j].getYear() > arr[j + 1].getYear())) {
+                        if (arr[j] != null && arr[i] != null && (arr[j].getYear() < arr[j + 1].getYear())) {
                             Student temp = arr[j];
                             arr[j] = arr[j + 1];
                             arr[j + 1] = temp;
                         }
                     } else {
-                        if (arr[j] != null && arr[i] != null && (arr[j].getYear() < arr[j + 1].getYear())) {
+                        if (arr[j] != null && arr[i] != null && (arr[j].getYear() > arr[j + 1].getYear())) {
                             Student temp = arr[j];
                             arr[j] = arr[j + 1];
                             arr[j + 1] = temp;
@@ -249,33 +390,5 @@ public class StudentService {
                     System.out.println(i.info());
             }
         }
-    }
-
-
-    public Student[] interact() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("enter the total number of students");
-        int numOfStudents = s.nextInt();
-        s.nextLine();
-        Student[] students = new Student[numOfStudents];
-        for (int i = 0; i < numOfStudents; i++) {
-            Student st = new Student();
-            System.out.print("Full name: ");
-            st.setFullName(s.nextLine());
-            System.out.print("Year Of Birth: ");
-            st.setYear(s.nextInt());
-            s.nextLine();
-            System.out.print("Gender [m/f]: ");
-            st.setGender(s.nextLine().charAt(0));
-            System.out.print("PHD [y/n]: ");
-            char phd = s.nextLine().charAt(0);
-            st.setPhd(phd == 'y' || phd == 'Y');
-            System.out.print("Mark: ");
-            st.setMark(s.nextDouble());
-            s.nextLine();
-            students[i] = st;
-            System.out.println();
-        }
-        return students;
     }
 }
