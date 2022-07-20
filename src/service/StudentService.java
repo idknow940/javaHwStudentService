@@ -43,6 +43,7 @@ public class StudentService {
                         }
                     }
                     break;
+
                 case 1:
                     if (students != null) {
                         for (Student student : students) {
@@ -52,48 +53,60 @@ public class StudentService {
                         System.out.println();
                     }
                     break;
+
                 case 2:
                     System.out.print("Ascending order? [y/n]: ");
                     char inp = scanner.nextLine().charAt(0);
                     boolean asc = inp == 'y' || inp == 'Y';
                     sortByAge(students, asc);
                     break;
+
                 case 3:
                     System.out.println("Oldest " + oldestStudents(students)[0].info());
                     break;
+
                 case 4:
                     System.out.println("Youngest " + youngestStudents(students)[0].info());
                     break;
+
                 case 5:
                     System.out.println("PHD students: ");
                     printStudents(phdStudents(students));
                     break;
+
                 case 6:
                     System.out.println("Male students: ");
                     printStudents(femaleStudents(students));
                     break;
+
                 case 7:
                     System.out.println("Female students: ");
                     printStudents(maleStudents(students));
                     break;
+
                 case 8:
                     System.out.println("Youngest Females: ");
                     printYoungestFemales(students);
                     break;
+
                 case 9:
                     System.out.println("Youngest Males: ");
                     printYoungestMales(students);
                     break;
+
                 case 10:
                     System.out.println("Oldest Females: ");
                     printOldestFemales(students);
                     break;
+
                 case 11:
                     System.out.println("Oldest Males: ");
                     printOldestMales(students);
                     break;
+
                 case 99:
                     active = false;
+
                 default:
                     break;
             }
@@ -101,7 +114,6 @@ public class StudentService {
     }
 
     public void create() {
-        boolean active = false;
         System.out.print("How many students will you enter [must be a number]: ");
         int studentCount = scanner.nextInt();
         scanner.nextLine();
