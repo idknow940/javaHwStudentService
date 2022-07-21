@@ -30,12 +30,12 @@ public class Student {
 
     public String info() {
         return "Student{" +
-                "id='" + id + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", year=" + year +
-                ", gender='" + gender + '\'' +
-                ", isPhd=" + (isPhd ? "Yes" : "No") +
-                ", mark=" + mark +
+                "id='" + getId() + '\'' +
+                ", fullName='" + getFullName() + '\'' +
+                ", year=" + getYear() +
+                ", gender='" + getGender() + '\'' +
+                ", isPhd=" + (isPhd() ? "Yes" : "No") +
+                ", mark=" + getMark() +
                 '}';
     }
 

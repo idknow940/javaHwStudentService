@@ -25,7 +25,7 @@ public class StudentService {
         while (active) {
             System.out.println("0. create students");
             System.out.println("1. add students");
-            System.out.println("2. remove students");
+            System.out.println("2. remove student");
             System.out.println("3. print students");
             System.out.println("4. sort students by age");
             System.out.println("5. oldest students");
