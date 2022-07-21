@@ -2,14 +2,17 @@ package model;
 
 public class Student {
     private int id;
-    private String fullName = "John Doe";
-    private int year = 2000;
-    private char gender = 'm';
-    private boolean isPhd = false;
+    private String fullName;
+    private int year;
+    private char gender;
+    private boolean isPhd;
     private double mark;
 
     public Student() {
-
+        this.fullName = "John Doe";
+        this.year = 2000;
+        this.gender = 'm';
+        this.isPhd = false;
     }
 
     public Student(int id, String fullName, int year, char gender, boolean isPhd, double mark) {

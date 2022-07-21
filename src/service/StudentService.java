@@ -5,13 +5,16 @@ import model.Student;
 import java.util.Scanner;
 
 public class StudentService {
-    Scanner scanner = new Scanner(System.in);
-    Student[] students = null;
+    Scanner scanner;
+    Student[] students;
 
     public StudentService() {
+        this.scanner = new Scanner(System.in);
+        this.students = null;
     }
 
     public StudentService(Student[] students) {
+        this.scanner = new Scanner(System.in);
         this.students = students;
     }
 
