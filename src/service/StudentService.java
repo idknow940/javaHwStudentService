@@ -8,23 +8,32 @@ public class StudentService {
     Scanner scanner = new Scanner(System.in);
     Student[] students = null;
 
+    public StudentService() {
+    }
+
+    public StudentService(Student[] students) {
+        this.students = students;
+    }
+
     public void menu() {
         boolean active = true;
-        System.out.println("----STUDENT CREATION MENU----");
+        System.out.println("\u2980 STUDENT CREATION MENU \u2980");
 
         while (active) {
             System.out.println("0. create students");
-            System.out.println("1. print students");
-            System.out.println("2. sort students by age");
-            System.out.println("3. oldest students");
-            System.out.println("4. youngest students");
-            System.out.println("5. PHD students");
-            System.out.println("6. male students");
-            System.out.println("7. female students");
-            System.out.println("8. youngest female students");
-            System.out.println("9. youngest male students");
-            System.out.println("10. oldest female students");
-            System.out.println("11. oldest male students");
+            System.out.println("1. add students");
+            System.out.println("2. remove students");
+            System.out.println("3. print students");
+            System.out.println("4. sort students by age");
+            System.out.println("5. oldest students");
+            System.out.println("6. youngest students");
+            System.out.println("7. PHD students");
+            System.out.println("8. male students");
+            System.out.println("9. female students");
+            System.out.println("10. youngest female students");
+            System.out.println("11. youngest male students");
+            System.out.println("12. oldest female students");
+            System.out.println("13. oldest male students");
             System.out.println("99. exit");
             System.out.print(">> ");
 
@@ -46,6 +55,20 @@ public class StudentService {
 
                 case 1:
                     if (students != null) {
+                        add();
+                    }
+                    break;
+
+                case 2:
+                    if (students != null) {
+                        System.out.print("Enter the id of the student [must be a number]: ");
+                        delete(scanner.nextInt());
+                        scanner.nextLine();
+                    }
+                    break;
+
+                case 3:
+                    if (students != null) {
                         for (Student student : students) {
                             if (student != null)
                                 System.out.println(student.info());
@@ -54,52 +77,52 @@ public class StudentService {
                     }
                     break;
 
-                case 2:
+                case 4:
                     System.out.print("Ascending order? [y/n]: ");
                     char inp = scanner.nextLine().charAt(0);
                     boolean asc = inp == 'y' || inp == 'Y';
                     sortByAge(students, asc);
                     break;
 
-                case 3:
+                case 5:
                     System.out.println("Oldest " + oldestStudents(students)[0].info());
                     break;
 
-                case 4:
+                case 6:
                     System.out.println("Youngest " + youngestStudents(students)[0].info());
                     break;
 
-                case 5:
+                case 7:
                     System.out.println("PHD students: ");
                     printStudents(phdStudents(students));
                     break;
 
-                case 6:
+                case 8:
                     System.out.println("Male students: ");
                     printStudents(femaleStudents(students));
                     break;
 
-                case 7:
+                case 9:
                     System.out.println("Female students: ");
                     printStudents(maleStudents(students));
                     break;
 
-                case 8:
+                case 10:
                     System.out.println("Youngest Females: ");
                     printYoungestFemales(students);
                     break;
 
-                case 9:
+                case 11:
                     System.out.println("Youngest Males: ");
                     printYoungestMales(students);
                     break;
 
-                case 10:
+                case 12:
                     System.out.println("Oldest Females: ");
                     printOldestFemales(students);
                     break;
 
-                case 11:
+                case 13:
                     System.out.println("Oldest Males: ");
                     printOldestMales(students);
                     break;
@@ -117,10 +140,12 @@ public class StudentService {
         System.out.print("How many students will you enter [must be a number]: ");
         int studentCount = scanner.nextInt();
         scanner.nextLine();
+
         students = new Student[studentCount];
+
         for (int i = 0; i < studentCount; i++) {
             Student student = new Student();
-
+            student.setId(i);
             // setting full name
             System.out.print("Full name: ");
             student.setFullName(scanner.nextLine());
@@ -140,13 +165,71 @@ public class StudentService {
             student.setPhd(phd == 'y' || phd == 'Y');
 
             // setting mark
-            System.out.print("Mark: ");
+            System.out.print("Mark [must be a number]: ");
             student.setMark(scanner.nextDouble());
             scanner.nextLine();
 
             students[i] = student;
 
             System.out.println();
+        }
+    }
+
+    public void add() {
+        if (students != null) {
+            System.out.print("How many students will you enter [must be a number]: ");
+            int studentCount = scanner.nextInt();
+            scanner.nextLine();
+            int oldStudentsLen = students.length;
+            Student[] oldStudents = students;
+            students = new Student[oldStudentsLen + studentCount];
+
+            for (int i = 0; i < students.length; i++) {
+                if (i >= oldStudentsLen) {
+                    Student student = new Student();
+
+                    student.setId(i);
+
+                    // setting full name
+                    System.out.print("Full name: ");
+                    student.setFullName(scanner.nextLine());
+
+                    // setting year
+                    System.out.print("Birth year [must be a number]: ");
+                    student.setYear(scanner.nextInt());
+                    scanner.nextLine();
+
+                    // setting gender
+                    System.out.print("Gender [m/f]: ");
+                    student.setGender(scanner.nextLine().charAt(0));
+
+                    // setting phd
+                    System.out.print("Is PHD [y/n]: ");
+                    char phd = scanner.nextLine().charAt(0);
+                    student.setPhd(phd == 'y' || phd == 'Y');
+
+                    // setting mark
+                    System.out.print("Mark [must be a number]: ");
+                    student.setMark(scanner.nextDouble());
+                    scanner.nextLine();
+
+                    students[i] = student;
+
+                    System.out.println();
+                } else {
+                    students[i] = oldStudents[i];
+                }
+            }
+        }
+    }
+
+    public void delete(int id) {
+        if (students != null) {
+            for (int i = 0; i < students.length; i++) {
+                if (students[i] != null && (students[i].getId() == id)) {
+                    students[i] = null;
+                }
+            }
         }
     }
 

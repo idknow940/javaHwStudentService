@@ -1,20 +1,47 @@
 package model;
 
 public class Student {
-    private String fullName;
-    private int year;
-    private char gender;
-    private boolean isPhd;
+    private int id;
+    private String fullName = "John Doe";
+    private int year = 2000;
+    private char gender = 'm';
+    private boolean isPhd = false;
     private double mark;
+
+    public Student() {
+
+    }
+
+    public Student(int id, String fullName, int year, char gender, boolean isPhd, double mark) {
+        this.id = id;
+        if (!fullName.isEmpty()) {
+            this.fullName = fullName;
+        }
+        if (year != 0) {
+            this.year = year;
+        }
+        this.gender = gender;
+        this.isPhd = isPhd;
+        this.mark = mark;
+    }
 
     public String info() {
         return "Student{" +
-                "fullName='" + fullName + '\'' +
+                "id='" + id + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", year=" + year +
                 ", gender='" + gender + '\'' +
                 ", isPhd=" + (isPhd ? "Yes" : "No") +
                 ", mark=" + mark +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFullName() {
