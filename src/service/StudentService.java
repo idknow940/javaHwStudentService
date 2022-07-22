@@ -186,7 +186,6 @@ public class StudentService {
             int oldStudentsLen = students.length;
             Student[] oldStudents = students;
             students = new Student[oldStudentsLen + studentCount];
-
             for (int i = 0; i < students.length; i++) {
                 if (i >= oldStudentsLen) {
                     Student student = new Student();
@@ -420,7 +419,7 @@ public class StudentService {
         }
     }
 
-    public Student[] seperateByMarks(double mark, boolean above, Student[] arr) {
+    public Student[] separateByMarks(double mark, boolean above, Student[] arr) {
         Student[] a = null;
         int studentCount = 0;
         if (arr != null) {

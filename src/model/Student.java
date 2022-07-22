@@ -19,9 +19,13 @@ public class Student {
         this.id = id;
         if (!fullName.isEmpty()) {
             this.fullName = fullName;
+        } else {
+            this.fullName = "John Doe";
         }
         if (year != 0) {
             this.year = year;
+        } else {
+            this.year = 2000;
         }
         this.gender = gender;
         this.isPhd = isPhd;
@@ -30,7 +34,7 @@ public class Student {
 
     public String info() {
         return "Student{" +
-                "id='" + getId() + '\'' +
+                "id=" + getId() +
                 ", fullName='" + getFullName() + '\'' +
                 ", year=" + getYear() +
                 ", gender='" + getGender() + '\'' +
